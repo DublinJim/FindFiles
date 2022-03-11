@@ -12,17 +12,23 @@ public class Main {
     public static void main(String[] args) throws IOException {
         String[] pathnames;
         String fileToFind = "FK9DqsiXEAIRKXr.png";
-        String directory = "C:\\Users\\james.keogh\\Desktop\\testImages";
-        File file = new File(directory);
+        String path = "C:\\Users\\james.keogh\\Desktop\\testImages\\";
+        String newDirectory = path + "NewFolder";
+        File file = new File(path);
         pathnames = file.list();
-        if (Files.isDirectory(Paths.get("C:\\Users\\james.keogh\\Desktop\\testImages\\test"))) {
-            System.out.println("Folder exists");
-        } else {
-            Files.createDirectory(Path.of("C:\\Users\\james.keogh\\Desktop\\testImages\\test"));
-        }
+        folderCheck(newDirectory);
 
         // Print the names of files and directories
-        findFiles(pathnames, fileToFind, directory);
+        findFiles(pathnames, fileToFind, path);
+    }
+
+    private static void folderCheck(String newDirectory) throws IOException {
+        if (Files.isDirectory(Paths.get(newDirectory))) {
+            System.out.println("Folder exists");
+        } else {
+            Files.createDirectory(Path.of(newDirectory));
+            System.out.println("Folder created");
+        }
     }
 
     private static void findFiles(String[] pathnames, String fileToFind, String directory) {
