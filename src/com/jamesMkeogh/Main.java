@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 
 public class Main {
@@ -14,7 +15,12 @@ public class Main {
         String directory = "C:\\Users\\james.keogh\\Desktop\\testImages";
         File file = new File(directory);
         pathnames = file.list();
-        Files.createDirectory(Path.of("C:\\Users\\james.keogh\\Desktop\\testImages\\test"));
+        if (Files.isDirectory(Paths.get("C:\\Users\\james.keogh\\Desktop\\testImages\\test"))) {
+            System.out.println("Folder exists");
+        } else {
+            Files.createDirectory(Path.of("C:\\Users\\james.keogh\\Desktop\\testImages\\test"));
+        }
+
         // Print the names of files and directories
         findFiles(pathnames, fileToFind, directory);
     }
